@@ -6,5 +6,6 @@
   "codeowners": ["@ypanimatchanka"],
   "requirements": ["numpy", "scipy", "matplotlib"],
   "version": "0.1.0",
-  "iot_class": "cloud_polling"
+  "iot_class": "cloud_polling",
+  "homeassistant": "2024.12.5"
 }
