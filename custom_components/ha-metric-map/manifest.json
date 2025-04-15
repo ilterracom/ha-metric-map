@@ -1,0 +1,10 @@
+{
+  "domain": "metric_map",
+  "name": "Metric Map",
+  "documentation": "https://github.com/your_username/temperature_map",
+  "dependencies": [],
+  "codeowners": ["@ypanimatchanka"],
+  "requirements": ["numpy", "scipy", "matplotlib"],
+  "version": "0.1.0",
+  "iot_class": "cloud_polling"
+}
