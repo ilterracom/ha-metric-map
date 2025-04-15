@@ -1,0 +1,9 @@
+{
+  "name": "Metric Map",
+  "description": "Display metrics tradient map of your home",
+  "url": "https://github.com/ilterracom/ha-metric-map",
+  "support": "info@ilterra.com",
+  "author": "@Yauhen Panimatchanka",
+  "version": "0.1.0",
+  "homeassistant": "2024.12"
+}
