@@ -1,7 +1,7 @@
 {
   "domain": "metric_map",
   "name": "Metric Map",
-  "documentation": "https://github.com/your_username/temperature_map",
+  "documentation": "https://github.com/ilterracom/ha-metric-map",
   "dependencies": [],
   "codeowners": ["@ypanimatchanka"],
   "requirements": ["numpy", "scipy", "matplotlib"],
