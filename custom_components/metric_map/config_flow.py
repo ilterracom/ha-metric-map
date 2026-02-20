@@ -50,11 +50,7 @@ class MetricMapConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             data_schema=vol.Schema(
                 {
                     vol.Required(CONF_NAME, default=DEFAULT_TITLE): selector.TextSelector(),
-                    vol.Required(CONF_IMAGE_PATH): selector.FileSelector(
-                        selector.FileSelectorConfig(
-                            accept="image/*",
-                        )
-                    ),
+                    vol.Required(CONF_IMAGE_PATH): selector.TextSelector(),
                     vol.Optional(CONF_UNIT, default=""): selector.TextSelector(),
                     vol.Optional(CONF_MIN_VALUE): selector.NumberSelector(
                         selector.NumberSelectorConfig(mode=selector.NumberSelectorMode.BOX)
@@ -116,7 +112,7 @@ class MetricMapOptionsFlow(config_entries.OptionsFlow):
             vol.Required(
                 CONF_IMAGE_PATH,
                 default=self._options.get(CONF_IMAGE_PATH, self._entry.data.get(CONF_IMAGE_PATH, "")),
-            ): selector.FileSelector(selector.FileSelectorConfig(accept="image/*")),
+            ): selector.TextSelector(),
             vol.Optional(CONF_UNIT, default=self._options.get(CONF_UNIT, "")): selector.TextSelector(),
             vol.Optional(
                 CONF_GRADIENT_OPACITY,
