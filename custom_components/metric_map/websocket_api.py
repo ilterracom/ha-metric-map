@@ -62,5 +62,14 @@ async def websocket_get_map(hass: HomeAssistant, connection, msg):
 
 def async_register_websocket_api(hass: HomeAssistant) -> None:
     """Register WebSocket API commands."""
-    websocket_api.async_register_command(hass, websocket_list_maps)
-    websocket_api.async_register_command(hass, websocket_get_map)
+    domain_data = hass.data.setdefault(DOMAIN, {})
+    if domain_data.get("ws_registered"):
+        return
+
+    try:
+        websocket_api.async_register_command(hass, websocket_list_maps)
+        websocket_api.async_register_command(hass, websocket_get_map)
+        domain_data["ws_registered"] = True
+    except ValueError:
+        # Command already registered (e.g. during reload); keep setup healthy.
+        domain_data["ws_registered"] = True

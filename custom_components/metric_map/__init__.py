@@ -19,31 +19,49 @@ PLATFORMS: list[str] = []
 
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     """Set up Metric Map from YAML."""
+    domain_data = hass.data.setdefault(DOMAIN, {})
     static_dir = Path(__file__).parent / "www"
-    await hass.http.async_register_static_paths(
-        [
-            StaticPathConfig(
-                "/metric_map_static",
-                str(static_dir),
-                cache_headers=False,
-            )
-        ]
-    )
+    if not domain_data.get("static_registered"):
+        try:
+            if hasattr(hass.http, "async_register_static_paths"):
+                await hass.http.async_register_static_paths(
+                    [
+                        StaticPathConfig(
+                            "/metric_map_static",
+                            str(static_dir),
+                            cache_headers=False,
+                        )
+                    ]
+                )
+            else:
+                hass.http.async_register_static_path(
+                    "/metric_map_static",
+                    str(static_dir),
+                    cache_headers=False,
+                )
+            domain_data["static_registered"] = True
+        except Exception as err:  # pragma: no cover - compatibility/runtime safety
+            _LOGGER.warning("Metric Map static path registration failed: %s", err)
 
     # Compatibility across HA frontend API versions.
-    frontend = hass.components.frontend
-    if hasattr(frontend, "async_register_extra_module_url"):
-        frontend.async_register_extra_module_url("/metric_map_static/metric-map-card.js")
-    elif hasattr(frontend, "async_register_extra_js_url"):
-        frontend.async_register_extra_js_url("/metric_map_static/metric-map-card.js")
-    else:
-        _LOGGER.warning(
-            "Could not auto-register Metric Map card resource. "
-            "Add /metric_map_static/metric-map-card.js manually in Lovelace resources."
-        )
+    if not domain_data.get("resource_registered"):
+        try:
+            frontend = getattr(hass.components, "frontend", None)
+            if frontend and hasattr(frontend, "async_register_extra_module_url"):
+                frontend.async_register_extra_module_url("/metric_map_static/metric-map-card.js")
+                domain_data["resource_registered"] = True
+            elif frontend and hasattr(frontend, "async_register_extra_js_url"):
+                frontend.async_register_extra_js_url("/metric_map_static/metric-map-card.js")
+                domain_data["resource_registered"] = True
+            else:
+                _LOGGER.warning(
+                    "Could not auto-register Metric Map card resource. "
+                    "Add /metric_map_static/metric-map-card.js manually in Lovelace resources."
+                )
+        except Exception as err:  # pragma: no cover - compatibility/runtime safety
+            _LOGGER.warning("Metric Map frontend resource registration failed: %s", err)
 
     async_register_websocket_api(hass)
-    hass.data.setdefault(DOMAIN, {})
     return True
 
 
