@@ -46,7 +46,8 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     # Compatibility across HA frontend API versions.
     if not domain_data.get("resource_registered"):
         try:
-            frontend = getattr(hass.components, "frontend", None)
+            components = getattr(hass, "components", None)
+            frontend = getattr(components, "frontend", None) if components else None
             if frontend and hasattr(frontend, "async_register_extra_module_url"):
                 frontend.async_register_extra_module_url("/metric_map_static/metric-map-card.js")
                 domain_data["resource_registered"] = True
