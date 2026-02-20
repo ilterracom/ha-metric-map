@@ -86,6 +86,11 @@ class MetricMapConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return MetricMapOptionsFlow(config_entry)
 
 
+@config_entries.HANDLERS.register(DOMAIN)
+class ConfigFlow(MetricMapConfigFlow):
+    """Backward-compatible config flow class for handler registration."""
+
+
 class MetricMapOptionsFlow(config_entries.OptionsFlow):
     """Handle options for Metric Map."""
 

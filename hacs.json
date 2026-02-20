@@ -3,9 +3,11 @@
   "description": "Display a live sensor heatmap on top of a floor map in Home Assistant",
   "url": "https://github.com/ilterracom/ha-metric-map",
   "author": "@Yauhen Panimatchanka",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homeassistant": "2025.1.0",
   "content_in_root": false,
   "render_readme": true,
-  "domains": ["metric_map"]
+  "domains": [
+    "metric_map"
+  ]
 }
