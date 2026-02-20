@@ -1,0 +1,12 @@
+{
+  "domain": "metric_map",
+  "name": "Metric Map",
+  "documentation": "https://github.com/ilterracom/ha-metric-map",
+  "codeowners": ["@ypanimatchanka"],
+  "config_flow": true,
+  "iot_class": "local_push",
+  "integration_type": "helper",
+  "requirements": [],
+  "version": "1.0.0",
+  "homeassistant": "2025.1.0"
+}

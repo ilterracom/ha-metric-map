@@ -1,0 +1,75 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Create Metric Map",
+        "description": "Create a map and configure base visualization settings.",
+        "data": {
+          "name": "Name",
+          "image_path": "Map image",
+          "unit": "Unit (optional)",
+          "min_value": "Min value (optional)",
+          "max_value": "Max value (optional)",
+          "gradient_opacity": "Gradient opacity",
+          "color_scheme": "Color scheme",
+          "show_markers": "Show markers"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Metric Map options",
+        "description": "Points configured: {points_count}",
+        "data": {
+          "image_path": "Map image",
+          "unit": "Unit (optional)",
+          "min_value": "Min value (optional)",
+          "max_value": "Max value (optional)",
+          "gradient_opacity": "Gradient opacity",
+          "color_scheme": "Color scheme",
+          "show_markers": "Show markers",
+          "action": "Action"
+        }
+      },
+      "points_menu": {
+        "title": "Manage points",
+        "description": "Current points: {points_count}",
+        "data": {
+          "action": "Action"
+        }
+      },
+      "add_point": {
+        "title": "Add point",
+        "data": {
+          "entity_id": "Sensor",
+          "x": "X (%)",
+          "y": "Y (%)",
+          "label": "Label (optional)"
+        }
+      },
+      "remove_point": {
+        "title": "Remove point",
+        "data": {
+          "point_index": "Point"
+        }
+      }
+    },
+    "selector": {
+      "options_action": {
+        "options": {
+          "save": "Save",
+          "manage_points": "Manage points"
+        }
+      },
+      "points_action": {
+        "options": {
+          "add": "Add point",
+          "remove": "Remove point",
+          "done": "Done"
+        }
+      }
+    }
+  }
+}
