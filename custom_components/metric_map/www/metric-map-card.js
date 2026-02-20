@@ -483,7 +483,7 @@ class MetricMapCardEditor extends HTMLElement {
         {
           name: "image_path",
           required: true,
-          selector: { text: {} },
+          selector: { image: {} },
         },
         { name: "unit", selector: { text: {} } },
         { name: "min_value", selector: { number: { mode: "box" } } },
